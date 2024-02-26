@@ -1,7 +1,9 @@
 import '../App.css'
 // import resultsMovies from '../mocks/with-results.json'
 
-function ListOfMovies ({ movies }) {
+function ListOfMovies ( { movies } ) {
+
+
     return(
         <div className='movie-container'>
             {
@@ -20,21 +22,19 @@ function ListOfMovies ({ movies }) {
 function NoMoviesResult () {
     return(
         <div>
-            <p>Movies do not found</p>
+            <p>No Movies found</p>
         </div>
     )
 }
 
-export function MoviesContainer({ movies }) {
+export function MoviesContainer( {movies} ) {
 
     const hasMovies = movies?.length > 0
 
     return(
-        
-            hasMovies 
-            ? <ListOfMovies movies={movies}/>
-            : <NoMoviesResult/> 
-        
+        hasMovies 
+        ? <ListOfMovies movies={movies}/>
+        : <NoMoviesResult/> 
     )
 
 } 

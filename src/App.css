@@ -43,6 +43,7 @@ header{
 
 .movie-box img{
   margin-bottom: .5rem;
+  cursor: pointer;
   transition: all ease-out .2s;
   -webkit-transition: all ease-out .2s;
   -moz-transition: all ease-out .2s;
