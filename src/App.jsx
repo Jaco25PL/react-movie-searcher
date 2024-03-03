@@ -1,66 +1,57 @@
-// import { useRef } from 'react'
 import './App.css'
-import { MoviesContainer } from './components/MoviesContainer'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
-// import resoultsMovies from "./mocks/with-results.json"
-// import resoultsMoviesFail from "./mocks/no-results.json"
+// import resultsMovies from './mocks/with-results.json'
+import { MoviesContainer } from './components/MoviesContainer'
 
 
 function App() {
 
-  const [movies, setMovies] = useState([])
-  const [searchValue, setSearchValue] = useState()
-  // setMovies(resoultsMovies.Search)
+  const [userSearch, setUserSearch] = useState("")
+  // const movies = resultsMovies.Search
 
-  // let input = "initial"
+  // const mapMovies = () => {
+  //   movies.map(movie => (
+  //     <div key={movie.imdbID}>
+  //       <img src={movie.Poster} alt={movie.imdbID} />
+  //     </div>
+  //   ))
+  // }
 
-  useEffect(() => {
 
-    const URL = `http://www.omdbapi.com/?apikey=4287ad07&s=${searchValue}`
-
-    fetch(URL)
-      .then(response => {
-        if(!response.ok){
-          throw new Error("Could not fetch data")
-        }
-        return response.json()
-      })
-      .then(fetchedData => {
-        setMovies(fetchedData.Search)
-      })
-
-      
-    },[searchValue])
-
-  // const movies = resoultsMovies.Search
-  // const hasMovies = movies?.length > 0
-
-  // const inputRef = useRef()
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    const fields = Object.fromEntries(new window.FormData(event.target))
-    // const searchValue = fields.query
-    setSearchValue(fields.query)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+    const {query} = Object.fromEntries( new window.FormData(e.target) )
+    setUserSearch(query)
   }
 
-
+  console.log(userSearch)
+  
   return (
-    <div className='container'>
-      <header>
-        <h1>Movie Searcher</h1>
-        <form onSubmit={handleSubmit} className='form'>
-          <input name='query' type='search' placeholder='Search your movie'></input>
-          <button type='submit'>Search</button>
-        </form>
+    <div className='w-full'>
+      <header className='mt-10'>
+        <div>
+          <form onSubmit={handleSubmit} className='flex gap-5 bg-slate-900 py-3 px-2 rounded-lg'>
+            <input 
+              className='bg-slate-900 outline-none text-slate-50 px-2 py-1 text-xl'
+              name='query' 
+              type="search"
+              // ref={inputRef} 
+              placeholder='Type a movie'
+            />
+            <button 
+              type='submit'
+              className='hover:text-slate-400 transition-all duration-200 active:text-slate-500 active:scale-95 ring-2 ring-slate-700  text-md mr-2 bg-gradient-to-tr from-slate-900 to-slate-800 px-2 rounded-md  text-slate-50 font-bold'
+            >Search</button>
+          </form>
+        </div>
       </header>
 
-      <main>
+      <main className='mx-10'>
+        <MoviesContainer/>
+      </main>  
 
-        <MoviesContainer movies={movies}/>
-
-      </main>
     </div>
   )
 }
