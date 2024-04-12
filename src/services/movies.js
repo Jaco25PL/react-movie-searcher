@@ -1,8 +1,8 @@
 export async function fetching ({ search }) {
 
-    if(search === '') return null
-    
     const API_KEY = '4287ad07'
+    
+    if(search === '') return null
 
     try {
         const response = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${search}`)
