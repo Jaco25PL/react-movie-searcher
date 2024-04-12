@@ -1,8 +1,7 @@
-import { useState } from "react"
+import { useState, useRef, useMemo, useCallback } from "react"
 import { fetching } from "../services/movies"
-import { useRef } from "react"
 
-export function useMovies ( ) {
+export function useMovies ( {sort} ) {
 // export function useMovies ( {search}  ) {
     const [ movies, setMovies ] = useState([]) // what the fetch give us
     const [ loading, setLoading ] = useState(false)
@@ -11,7 +10,9 @@ export function useMovies ( ) {
 
     // useEffect(() => {
   
-      const getMovies = async ({search}) => {
+      const getMovies = useCallback( 
+        
+        async ({search}) => {
         
         if(sameMovie.current === search) return
         
@@ -26,12 +27,20 @@ export function useMovies ( ) {
         } finally {
           setLoading(false)
         }
-      }
-  
+      
+      }, [])
+
+      const sortedMovies = useMemo(() => {
+        return sort
+          ? [...movies].sort((a, b) => a.year.substring(0, 4) - b.year.substring(0, 4))
+          // ? [...movies].sort((a, b) => a.title.localeCompare(b.title))
+          : movies
+      }, [sort, movies])
+      
       // getMovies()
   
     // }, [search])
   
-    return { movies, loading, getMovies }
+    return { movies: sortedMovies , loading, getMovies }
   }
   

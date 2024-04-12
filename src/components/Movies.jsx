@@ -20,7 +20,7 @@ function ListedMovies ({ movies }) {
 
 function NoMovies () {
     return (
-        <span className='font-semibold text-gray-50'>No movies found, sorry</span>
+        <span className='w-fit font-semibold text-gray-50'>No movies found, sorry</span>
     )
 }
 

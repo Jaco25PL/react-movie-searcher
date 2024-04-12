@@ -1,16 +1,26 @@
+import { useState } from 'react'
 import './App.css'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
 import { useSearch } from './hooks/useSearch'
+import debounce from "just-debounce-it"
+import { useCallback } from 'react'
 
 function App() {
 
+  const [ sort, setSort ] = useState(false)
   const { search, setSearch, error } = useSearch()
-  const { movies, loading , getMovies } = useMovies({ search }) 
+  const { movies, loading , getMovies } = useMovies({sort}) 
+
+  const debounced = useCallback(
+    debounce(newSearch => {
+      getMovies({ search: newSearch })
+    }, 300)
+    , []
+  )
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
     if(!error){
       getMovies({search})
     }
@@ -19,6 +29,11 @@ function App() {
   const handleChange = (e) => {
     const newSearch = e.target.value
     setSearch(newSearch)
+    !error && debounced(newSearch)
+  }
+
+  const handleSort = () => {
+    setSort(!sort)
   }
 
   return (
@@ -28,7 +43,13 @@ function App() {
         <h1 className='font-bold text-5xl text-gray-50 w-fit mx-auto mt-10'>MOVIE SEARCHER</h1>
       </header>
       <nav className='w-fit my-10 mx-auto flex flex-col items-center'>
-        <form onSubmit={handleSubmit} className='flex gap-3 mb-3'>
+        <form onSubmit={handleSubmit} className='flex justify-center items-center gap-3 mb-3'>
+
+          <div className='items-center flex gap-2'>
+            <label htmlFor="sort" className='text-gray-50'>Sort</label>
+            <input type='checkbox' name='sort' title='sort' onChange={handleSort} />
+          </div>
+
           <input onChange={handleChange} type="text" name='query' title='search' placeholder='Search a movie' className={` bg-violet-900 text-gray-50 font-semibold p-3 rounded-lg focus:outline-none focus:bg-violet-700 transition-colors duration-300 ease-in-out`}  />
           <button className='bg-violet-900 text-gray-50 font-semibold p-3 rounded-lg hover:bg-violet-700 transition-colors duration-300 ease-in-out'  type='submit'>Search</button>
         </form>

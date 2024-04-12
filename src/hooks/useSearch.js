@@ -10,6 +10,7 @@ export function useSearch () {
   
       if(firstInput.current){
         firstInput.current = search === ''
+        setError(true)
         return
       }
       if(search === ''){
