@@ -1,3 +1,4 @@
+
 export async function fetching ({ search }) {
 
     const API_KEY = '4287ad07'
@@ -9,6 +10,7 @@ export async function fetching ({ search }) {
         if(!response.ok){
             throw new Error(`Failed to fetch data. Status: ${response.status}`)
         }
+        
         const movies = await response.json()
 
         const mappedMovies = movies.Search?.map(movie => ({

@@ -12,6 +12,7 @@ function App() {
   const { search, setSearch, error } = useSearch()
   const { movies, loading , getMovies } = useMovies({sort}) 
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounced = useCallback(
     debounce(newSearch => {
       getMovies({ search: newSearch })
@@ -21,6 +22,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
     if(!error){
       getMovies({search})
     }
@@ -33,31 +35,35 @@ function App() {
   }
 
   const handleSort = () => {
-    setSort(!sort)
+    movies && setSort(!sort)
   }
 
   return (
 
-    <div className='w-full '>
-      <header>
-        <h1 className='font-bold text-5xl text-gray-50 w-fit mx-auto mt-10'>MOVIE SEARCHER</h1>
+    <div className='w-full'>
+      <header >
+        <h1 className='text-center font-bold text-3xl sm:text-5xl text-gray-50 sm:w-fit sm:mx-auto mt-10'>MOVIE SEARCHER</h1>
       </header>
+
       <nav className='w-fit my-10 mx-auto flex flex-col items-center'>
-        <form onSubmit={handleSubmit} className='flex justify-center items-center gap-3 mb-3'>
+        <form onSubmit={handleSubmit} className='flex flex-col-reverse  gap-3 mb-3'>
 
           <div className='items-center flex gap-2'>
-            <label htmlFor="sort" className='text-gray-50'>Sort</label>
+            <label htmlFor="sort" className='font-semibold text-gray-50'>Sort by year</label>
             <input type='checkbox' name='sort' title='sort' onChange={handleSort} />
           </div>
 
-          <input onChange={handleChange} type="text" name='query' title='search' placeholder='Search a movie' className={` bg-violet-900 text-gray-50 font-semibold p-3 rounded-lg focus:outline-none focus:bg-violet-700 transition-colors duration-300 ease-in-out`}  />
-          <button className='bg-violet-900 text-gray-50 font-semibold p-3 rounded-lg hover:bg-violet-700 transition-colors duration-300 ease-in-out'  type='submit'>Search</button>
+          <div>
+            <input onChange={handleChange} type="text" name='query' title='search' placeholder='Search a movie' className={`mr-2 bg-violet-900 text-gray-50 font-semibold p-3 rounded-lg focus:outline-none focus:bg-violet-700 transition-colors duration-300 ease-in-out`}  />
+            <button className=' bg-violet-900 text-gray-50 font-semibold p-3 rounded-lg hover:bg-violet-700 transition-colors duration-300 ease-in-out'  type='submit'>Search</button>
+          </div>
         </form>
 
         <span className='text-red-500'>{error}</span>
      
       </nav>
-      <main className='w-full p-10'>
+
+      <main className={`p-10 ${loading || !movies ? 'flex justify-center' : 'block'} `}>
         <div className='justify-items-center gap-10 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]'>
 
         {!loading
@@ -73,21 +79,3 @@ function App() {
 }
 
 export default App
-
-
-
-// const [ search, setSearch ] = useState('deadpool') // what we have from the input
-// const [ error, setError ] = useState(false)
-
-// const handleSubmit = (e) => {
-    // const field = new window.FormData(e.target)
-    // const query = field.get('query') 
-  
-    // if(query.length < 3){
-    //   // setError(true)
-    //   return
-    // }else{
-    //   // setError(false)
-    //   setSearch(query)
-    // }
-// }
