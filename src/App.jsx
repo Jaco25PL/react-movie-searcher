@@ -38,6 +38,8 @@ function App() {
     movies && setSort(!sort)
   }
 
+  const empty = movies.length > 0
+
   return (
 
     <div className='w-full'>
@@ -63,13 +65,13 @@ function App() {
      
       </nav>
 
-      <main className={`p-10 ${loading || !movies ? 'flex justify-center' : 'block'} `}>
+      <main className={`p-10 ${loading || !empty ? 'flex justify-center' : 'block'} `}>
         <div className='justify-items-center gap-10 grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]'>
 
-        {!loading
-          ? <Movies movies={movies}/>
-          : <span className='font-semibold text-gray-50'>Loading...</span>
-        }
+          {!loading
+            ? <Movies movies={movies}/>
+            : <span className='font-semibold text-gray-50'>Loading...</span>
+          }
 
         </div>
       </main>
