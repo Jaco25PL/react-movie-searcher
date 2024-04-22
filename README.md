@@ -2,6 +2,7 @@
 
 ### This is a simple React.js + vite movie search application that utilizes the following technologies and techniques
 
+## You can check the app by clicking this link: [app](https://simple-react-movie-searcher.vercel.app/)
 
 # Features
 
