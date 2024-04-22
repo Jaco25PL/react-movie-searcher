@@ -18,9 +18,9 @@ export function useMovies ( {sort} ) {
         try {
           setLoading(true)
           sameMovie.current = search
-          // await fetching({search}).then(setMovies)
-          const newMovies = await fetching({search})
-          setMovies(newMovies)
+          await fetching({search}).then(setMovies)
+          // const newMovies = await fetching({search})
+          // setMovies(newMovies)
   
         } catch (e) {
           throw new Error(`Something went wrong. Error: ${e}`)
@@ -32,7 +32,8 @@ export function useMovies ( {sort} ) {
 
       const sortedMovies = useMemo(() => {
         return sort
-          ? [...movies].sort((a, b) => a.year - b.year)
+          ? [...movies].sort((a, b) => a.year.substring(0, 4) - b.year.substring(0, 4))
+          // ? [...movies].sort((a, b) => a.year - b.year)
           // ? [...movies].sort((a, b) => a.title.localeCompare(b.title))
           : movies
       }, [sort, movies])

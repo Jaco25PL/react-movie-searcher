@@ -22,13 +22,13 @@ function ListedMovies ({ movies }) {
 
 function NoMovies () {
     return (
-        <span className=' font-semibold text-gray-50'>No movies found, sorry</span>
+        <span className='font-semibold text-gray-50'>No movies found, sorry</span>
     )
 }
 
 export function Movies ({ movies }) {
 
-    const empty = movies.length > 0
+    const empty = movies?.length > 0
 
     return (
         movies | empty ? <ListedMovies movies={movies}/> : <NoMovies/>
