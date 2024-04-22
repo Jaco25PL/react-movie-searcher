@@ -37,8 +37,6 @@ function App() {
   const handleSort = () => {
     movies && setSort(!sort)
   }
-
-
   
   const empty = movies?.length > 0
 

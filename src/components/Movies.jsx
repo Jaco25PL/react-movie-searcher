@@ -28,10 +28,8 @@ function NoMovies () {
 
 export function Movies ({ movies }) {
 
-    const empty = movies?.length > 0
-
     return (
-        movies | empty ? <ListedMovies movies={movies}/> : <NoMovies/>
+        movies ? <ListedMovies movies={movies}/> : <NoMovies/>
     )
 
 }

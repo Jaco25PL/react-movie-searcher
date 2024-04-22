@@ -8,7 +8,6 @@ export function useMovies ( {sort} ) {
     const sameMovie = useRef(null)
 
     // useEffect(() => {
-  
       const getMovies = useCallback( 
         
         async ({search}) => {
