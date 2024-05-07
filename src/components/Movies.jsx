@@ -1,11 +1,8 @@
-
-
 /* eslint-disable react/prop-types */
 function ListedMovies ({ movies }) {
 
     return (
         <>
-
         {
             movies.map(movie => (
                 <div key={movie.id} className='flex flex-col items-center'>
@@ -15,12 +12,12 @@ function ListedMovies ({ movies }) {
                 </div>
             ))
         }
-        
         </>
     )
 }
 
 function NoMovies () {
+
     return (
         <span className='font-semibold text-gray-50'>No movies found, sorry</span>
     )

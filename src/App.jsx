@@ -56,8 +56,9 @@ function App() {
           </div>
 
           <div>
-            <input onChange={handleChange} type="text" name='query' title='search' placeholder='Search a movie' className={`mr-2 bg-violet-900 text-gray-50 font-semibold p-3 rounded-lg focus:outline-none focus:bg-violet-700 transition-colors duration-300 ease-in-out`}  />
-            <button className=' bg-violet-900 text-gray-50 font-semibold p-3 rounded-lg hover:bg-violet-700 transition-colors duration-300 ease-in-out'  type='submit'>Search</button>
+            <input onChange={handleChange} type="text" name='query' title='search' placeholder='Search a movie' className={`mr-2 bg-violet-900 text-gray-50 font-semibold p-3 rounded-lg focus:outline-none  focus:bg-violet-700 transition-colors duration-300 ease-in-out `}  />
+            <button type='submit'className=' bg-violet-900 text-gray-50 font-semibold p-3 rounded-lg hover:bg-violet-700 transition-colors duration-300 ease-in-out'  
+            >Search</button>
           </div>
         </form>
 
