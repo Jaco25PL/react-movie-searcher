@@ -12,7 +12,6 @@ export async function fetching ({ search }) {
     //         'X-RapidAPI-Host': 'ott-details.p.rapidapi.com'
     //     }
     // };
-    
 
     try {
 
@@ -39,7 +38,6 @@ export async function fetching ({ search }) {
           year: movie.Year,
           type: movie.type
         }))
-
 
         // console.log(mappedMovies)
 
